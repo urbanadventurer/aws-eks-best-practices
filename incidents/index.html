@@ -327,27 +327,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revoke-temporary-security-credentials-assigned-to-the-pod-or-worker-node-if-necessary" class="md-nav__link">
-    Revoke temporary security credentials assigned to the pod or worker node if necessary
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cordon-the-worker-node" class="md-nav__link">
-    Cordon the worker node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable-termination-protection-on-impacted-worker-node" class="md-nav__link">
-    Enable termination protection on impacted worker node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#label-offending-the-podnode-with-a-label-indicating-that-it-is-part-of-an-active-investigation" class="md-nav__link">
     Label offending the Pod/Node with a label indicating that it is part of an active investigation
   </a>
@@ -462,27 +441,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revoke-temporary-security-credentials-assigned-to-the-pod-or-worker-node-if-necessary" class="md-nav__link">
-    Revoke temporary security credentials assigned to the pod or worker node if necessary
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cordon-the-worker-node" class="md-nav__link">
-    Cordon the worker node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable-termination-protection-on-impacted-worker-node" class="md-nav__link">
-    Enable termination protection on impacted worker node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#label-offending-the-podnode-with-a-label-indicating-that-it-is-part-of-an-active-investigation" class="md-nav__link">
     Label offending the Pod/Node with a label indicating that it is part of an active investigation
   </a>
@@ -578,21 +536,18 @@ spec:
   - Egress
 </code></pre>
 
-<blockquote>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
 <p>A Network Policy may prove ineffective if an attacker has gained access to underlying host. If you suspect that has happened, you can use <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">AWS Security Groups</a> to isolate a compromised host from other hosts. When changing a host's security group, be aware that it will impact all containers running on that host.  </p>
-</blockquote>
-<h3 id="revoke-temporary-security-credentials-assigned-to-the-pod-or-worker-node-if-necessary">Revoke temporary security credentials assigned to the pod or worker node if necessary<a class="headerlink" href="#revoke-temporary-security-credentials-assigned-to-the-pod-or-worker-node-if-necessary" title="Permanent link">&para;</a></h3>
-<p>If the worker node has been assigned an IAM role that allows Pods to gain access to other AWS resources, remove those roles from the instance to prevent further damage from the attack. Similarly, if the Pod has been assigned an IAM role, evaluate whether you can safely remove the IAM policies from the role without impacting other workloads.</p>
-<h3 id="cordon-the-worker-node">Cordon the worker node<a class="headerlink" href="#cordon-the-worker-node" title="Permanent link">&para;</a></h3>
-<p>By cordoning the impacted worker node, you're informing the scheduler to avoid scheduling pods onto the affected node. This will allow you to remove the node for forensic study without disrupting other workloads.</p>
-<blockquote>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>This guidance is not applicable to Fargate where each Fargate pod run in its own sandboxed environment.  Instead of cordoning, sequester the affected Fargate pods by applying a network policy that denies all ingress and egress traffic. </p>
-</blockquote>
-<h3 id="enable-termination-protection-on-impacted-worker-node">Enable termination protection on impacted worker node<a class="headerlink" href="#enable-termination-protection-on-impacted-worker-node" title="Permanent link">&para;</a></h3>
-<p>An attacker may attempt to erase their misdeeds by terminating affected node.  Enabling <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingDisableAPITermination">termination protection</a> can prevent this from happening.  <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection">Instance scale-in protection</a> will protect the node from a scale-in event. </p>
-<blockquote>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>You cannot enable termination protection on a Spot instance. </p>
-</blockquote>
+</div>
 <h3 id="label-offending-the-podnode-with-a-label-indicating-that-it-is-part-of-an-active-investigation">Label offending the Pod/Node with a label indicating that it is part of an active investigation<a class="headerlink" href="#label-offending-the-podnode-with-a-label-indicating-that-it-is-part-of-an-active-investigation" title="Permanent link">&para;</a></h3>
 <p>This will serve as a warning to cluster administrators not to tamper with the affected Pods/Nodes until the investigation is complete. </p>
 <h3 id="capture-volatile-artifacts-on-the-worker-node">Capture volatile artifacts on the worker node<a class="headerlink" href="#capture-volatile-artifacts-on-the-worker-node" title="Permanent link">&para;</a></h3>

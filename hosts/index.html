@@ -328,27 +328,7 @@
     Run Amazon Inspector to assesses hosts for exposure, vulnerabilities, and deviations from best practices
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#alternatives" class="md-nav__link">
-    Alternatives
-  </a>
-  
-    <nav class="md-nav" aria-label="Alternatives">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#run-selinux" class="md-nav__link">
-    Run SELinux
-  </a>
-  
-    <nav class="md-nav" aria-label="Run SELinux">
+    <nav class="md-nav" aria-label="Run Amazon Inspector to assesses hosts for exposure, vulnerabilities, and deviations from best practices">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -479,27 +459,7 @@
     Run Amazon Inspector to assesses hosts for exposure, vulnerabilities, and deviations from best practices
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#alternatives" class="md-nav__link">
-    Alternatives
-  </a>
-  
-    <nav class="md-nav" aria-label="Alternatives">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#run-selinux" class="md-nav__link">
-    Run SELinux
-  </a>
-  
-    <nav class="md-nav" aria-label="Run SELinux">
+    <nav class="md-nav" aria-label="Run Amazon Inspector to assesses hosts for exposure, vulnerabilities, and deviations from best practices">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -552,27 +512,32 @@
 <p>With EKS Fargate, AWS will automatically update the underlying infrastructure as updates become available.  Oftentimes this can be done seamlessly, but there may be times when an update will cause your task to be rescheduled.  Hence, we recommend that you create deployments with multiple replicas when running your application as a Fargate pod. </p>
 <h3 id="periodically-run-kube-bench-to-verify-compliance-with-cis-benchmarks-for-kubernetes">Periodically run kube-bench to verify compliance with <a href="https://www.cisecurity.org/benchmark/kubernetes/">CIS benchmarks for Kubernetes</a><a class="headerlink" href="#periodically-run-kube-bench-to-verify-compliance-with-cis-benchmarks-for-kubernetes" title="Permanent link">&para;</a></h3>
 <p>When running <a href="https://github.com/aquasecurity/kube-bench">kube-bench</a> against an EKS cluster, follow these instructions from Aqua Security, https://github.com/aquasecurity/kube-bench#running-in-an-eks-cluster. </p>
-<blockquote>
-<p>Caution: false positives may appear in the report because of the way the EKS optimized AMI configures the kubelet.  The issue is currently being tracked on <a href="https://github.com/aquasecurity/kube-bench/issues/571">GitHub</a>. </p>
-</blockquote>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>false positives may appear in the report because of the way the EKS optimized AMI configures the kubelet.  The issue is currently being tracked on <a href="https://github.com/aquasecurity/kube-bench/issues/571">GitHub</a>. </p>
+</div>
 <h3 id="minimize-access-to-worker-nodes">Minimize access to worker nodes<a class="headerlink" href="#minimize-access-to-worker-nodes" title="Permanent link">&para;</a></h3>
 <p>Instead of enabling SSH access, use <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html">SSM Session Manager</a> when you need to remote into a host.  Unlike SSH keys which can be lost, copied, or shared, Session Manager allows you to control access to EC2 instances using IAM.  Moreover, it provides an audit trail and log of the commands that were run on the instance.</p>
 <h3 id="deploy-workers-onto-private-subnets">Deploy workers onto private subnets<a class="headerlink" href="#deploy-workers-onto-private-subnets" title="Permanent link">&para;</a></h3>
 <p>By deploying workers onto private subnets, you minimize their exposure to the Internet where attacks often originate.  At present, worker nodes that are part of a managed node group are automatically assigned a public IP. If you plan to use managed node groups use AWS security groups to restrict or deny inbound access from the Internet (0.0.0.0/0). Risk to workers that are deployed onto public subnets can also be mitigated by implementing restrictive security group rules. </p>
-<blockquote>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>Starting 22,2020, EKS will be updating the behavior of managed nodes groups to no longer assign public IPs to nodes. After this date, public IP assignment must be controlled via the subnet settings where the node is instantiated.</p>
-</blockquote>
+</div>
 <h3 id="run-amazon-inspector-to-assesses-hosts-for-exposure-vulnerabilities-and-deviations-from-best-practices">Run Amazon Inspector to assesses hosts for exposure, vulnerabilities, and deviations from best practices<a class="headerlink" href="#run-amazon-inspector-to-assesses-hosts-for-exposure-vulnerabilities-and-deviations-from-best-practices" title="Permanent link">&para;</a></h3>
 <p><a href="https://docs.aws.amazon.com/inspector/latest/userguide/inspector_introduction.html">Inspector</a> requires the deployment of an agent that continually monitors activity on the instance while using set of rules to assess alignment with best practices. </p>
-<blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>At present, managed node groups do not allow you to supply user metadata or your own AMI.  If you want to run Inspector on managed workers, you will need to install the agent after the node has been bootstrapped.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
 <p>Inspector cannot be run on the infrastructure used to run Fargate pods. </p>
-</blockquote>
-<h2 id="alternatives">Alternatives<a class="headerlink" href="#alternatives" title="Permanent link">&para;</a></h2>
-<h3 id="run-selinux">Run SELinux<a class="headerlink" href="#run-selinux" title="Permanent link">&para;</a></h3>
-<blockquote>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>Available on RHEL and CoreOS instances</p>
-</blockquote>
+</div>
 <p>SELinux provides an additional layer of security to keep containers isolated from each other and from the host. SELinux allows administrators to enforce mandatory access controls (MAC) for every user, application, process, and file.  Think of it as a backstop that restricts access to specific resources on the operation based on a set of labels.  On EKS it can be used to prevent containers from accessing each other's resources. </p>
 <p>SELinux has a module called <code>container_t</code> which general module used for running containers.  When you configure SELinux for Docker, Docker automatically labels workloads <code>container_t</code> as a type and gives each container a unique MCS level.  This alone will effectively isolate containers from each another.  If you need to give it more privileged access to a container, you can create your own profile in SElinux which grants it permissions to specific areas of the file system.  This is similiar to PSPs in that you can create different profiles for different containers/pods.  For example, you can have a profile for general workloads with a set of restrictive controls and another for things that require privileged access.</p>
 <p>You can assign SELinux labels using pods or container security context as in the following <code>podSec</code> excerpt: </p>
@@ -586,9 +551,10 @@
 
 <p>In this example <code>s0:c144:c154</code> corresponds to an MCS label assigned to a file that the container is allowed to access. </p>
 <p>On EKS you could create policies that allow for privileged containers to run, like FluentD and create an SELinux policy to allow it to read from /var/log on the host. </p>
-<blockquote>
-<p>Caution: SELinux will ignore containers where the type is unconfined. </p>
-</blockquote>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>SELinux will ignore containers where the type is unconfined. </p>
+</div>
 <h4 id="additional-resources">Additional resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h4>
 <ul>
 <li><a href="https://platform9.com/blog/selinux-kubernetes-rbac-and-shipping-security-policies-for-on-prem-applications/">SELinux Kubernetes RBAC and Shipping Security Policies for On-prem Applications</a></li>

@@ -229,20 +229,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#namespaces" class="md-nav__link">
-    Namespaces
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#network-policies" class="md-nav__link">
-    Network policies
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rbac" class="md-nav__link">
     RBAC
   </a>
@@ -441,20 +427,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#namespaces" class="md-nav__link">
-    Namespaces
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#network-policies" class="md-nav__link">
-    Network policies
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rbac" class="md-nav__link">
     RBAC
   </a>
@@ -560,13 +532,10 @@
 <p>By constrast, soft multi-tenancy can be used in settings where you want to offer Kubernetes as a service (KaaS).  With KaaS, your application is hosted in a shared cluster along with a collection of controllers and CRDs that provide a set of PaaS services.  Tenants interact directly with the Kubernetes API server and are permitted to perform CRUD operations on non policy objects.  There is also an element of self-service in that tenants may be allowed to create and manage their own namespaces.  In this type of environment, tenants are assumed to be running untrusted code.  As such, you'll need to implement strict network policies as well as pod sandboxing.  Sandboxing is where you run the containers of a pod inside a micro VM like Firecracker or in a user-space kernel.  Outside of Fargate, EKS doesn't support this type of configuration.</p>
 <p>The final use case for soft multi-tenancy is in a SaaS setting where you're deploying an instance of an application into a namespace for each tenant.  Unlike the other use cases, the tenant does not directly interface with the Kubernetes API.  Instead, users go through a proxy to get provision an instance of the application on the cluster.  The proxy is responsible for sending the necessary commands to the  Kubernetes API server to create a new namespace and provision a instance of the application in that namespace.  Once the application has been provision, the tenant interacts with directly with the application.</p>
 <p>In each of these instances the following constructs are used to isolate tenants from each other: </p>
-<h3 id="namespaces">Namespaces<a class="headerlink" href="#namespaces" title="Permanent link">&para;</a></h3>
-<p>Namespaces are fundamental to implementing multi-tenancy.  They allow you to logical divide the cluster into logical partitions.  Moreover, quotas, network policies, service accounts, and other objects needed to implement multi-tenancy are scoped to a namespace.</p>
-<h3 id="network-policies">Network policies<a class="headerlink" href="#network-policies" title="Permanent link">&para;</a></h3>
-<p>Network policies restrict communication between pods using labels or ip address ranges.  In a multi-tenant environment where strict network isolation between tenants is required, we recommend starting with a deny rule that prevents applications between pods, another rule that allows all pods to query CoreDNS for name resolution.  With that in place, you can begin layering additional rules that allows all communication within a namespace.  This can be further refined as required.  By default, all pods in all namespaces are allowed to communicate with each other. </p>
-<blockquote>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
 <p>Network policies are necessary but not sufficient. The enforcement of network policies requires a policy engine like Calico or Cilium. </p>
-</blockquote>
+</div>
 <h3 id="rbac">RBAC<a class="headerlink" href="#rbac" title="Permanent link">&para;</a></h3>
 <p>RBAC roles and bindings are the mechanism used to restrict the actions that can be performed againsts objects in different namespaces.  In the enterprise and KaaS use cases, RBAC can be used to delegate administration of namespaced objects to select groups of individuals.</p>
 <h3 id="quotas">Quotas<a class="headerlink" href="#quotas" title="Permanent link">&para;</a></h3>
