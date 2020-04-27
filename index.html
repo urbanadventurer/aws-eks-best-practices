@@ -415,7 +415,7 @@
 <h2 id="understanding-the-shared-responsibility-model">Understanding the Shared Responsibility Model<a class="headerlink" href="#understanding-the-shared-responsibility-model" title="Permanent link">&para;</a></h2>
 <p>Security and compliance are considered shared responsibilities when using a managed service like EKS. Generally speaking, AWS is responisble for security "of" the cloud whereas you, the customer, are responsible for security "in" the cloud. With EKS, AWS is responsible for managing of the EKS managed Kubernetes control plane. This includes the Kubernetes masters, the ETCD database, and other infrastructure necessary for AWS to deliver a secure and reliable service. As a consumer of EKS, you are largely responsible for the topics in this guide, e.g. IAM, pod security, runtime security, network security, and so forth. </p>
 <p>When it comes to infrastructure security, AWS will assume additional responsibilities as you move from self-managed workers, to managed node groups, to Fargate. For example, with Fargate, AWS becomes  responsible for securing the underlying instance/runtime used to run your Pods. </p>
-<p><img alt="" src="../site/images/SRM-EKS.jpg" /></p>
+<p><img alt="Shared Responsibility Model" src="images/SRM-EKS.jpg" /></p>
 <p>Before designing your system, it is important to know where the line of demarcation is between your responsibilities and the provider of the service (AWS).</p>
 <p>For additional information about the shared responsibility model, see https://aws.amazon.com/compliance/shared-responsibility-model/</p>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>

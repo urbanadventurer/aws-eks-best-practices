@@ -494,6 +494,7 @@
 <h3 id="enable-audit-logs">Enable audit logs<a class="headerlink" href="#enable-audit-logs" title="Permanent link">&para;</a></h3>
 <p>The audit logs are part of the EKS managed Kubernetes control plane logs that are managed by EKS.  Instructions for enabling/disabling the control plane logs, which includes the logs for the Kubernetes API server, the controller manager, and the scheduler, along with the audit log, can be found here, https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html#enabling-control-plane-log-export. </p>
 <blockquote>
+<p>When you enable control plane logging, you will incur <a href="https://aws.amazon.com/cloudwatch/pricing/">costs</a> for storing the logs in CloudWatch. This raises a broader issue about the ongoing cost of security. Ultimately you will have to weigh those costs against the cost of a security breach, e.g. financial loss, damage to your reputation, etc. You may find that you can adequately secure your environment by implementing only some of the recommendations in this guide. </p>
 <p>Caution: the maximum size for a CWL entry is 256KB whereas the maximum Kubernetes API request size is 1.5MiB.</p>
 </blockquote>
 <h3 id="utilize-audit-metadata">Utilize audit metadata<a class="headerlink" href="#utilize-audit-metadata" title="Permanent link">&para;</a></h3>

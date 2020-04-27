@@ -571,7 +571,7 @@
 <h2 id="alternatives">Alternatives<a class="headerlink" href="#alternatives" title="Permanent link">&para;</a></h2>
 <h3 id="run-selinux">Run SELinux<a class="headerlink" href="#run-selinux" title="Permanent link">&para;</a></h3>
 <blockquote>
-<p>Available on RHEL instances</p>
+<p>Available on RHEL and CoreOS instances</p>
 </blockquote>
 <p>SELinux provides an additional layer of security to keep containers isolated from each other and from the host. SELinux allows administrators to enforce mandatory access controls (MAC) for every user, application, process, and file.  Think of it as a backstop that restricts access to specific resources on the operation based on a set of labels.  On EKS it can be used to prevent containers from accessing each other's resources. </p>
 <p>SELinux has a module called <code>container_t</code> which general module used for running containers.  When you configure SELinux for Docker, Docker automatically labels workloads <code>container_t</code> as a type and gives each container a unique MCS level.  This alone will effectively isolate containers from each another.  If you need to give it more privileged access to a container, you can create your own profile in SElinux which grants it permissions to specific areas of the file system.  This is similiar to PSPs in that you can create different profiles for different containers/pods.  For example, you can have a profile for general workloads with a set of restrictive controls and another for things that require privileged access.</p>
