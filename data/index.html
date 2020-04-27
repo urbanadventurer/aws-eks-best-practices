@@ -463,10 +463,14 @@ parameters:
 <p>If you have shared datasets with different POSIX file permissions or want to restrict access to part of the shared file system by creating different mount points, consider using EFS access points. To learn more about working with access points, see https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html. Today, if you want to use access point (AP) you'll need to reference the AP in the PV's <code>volumeHandle</code> parameter.</p>
 <h1 id="secrets-management">Secrets management<a class="headerlink" href="#secrets-management" title="Permanent link">&para;</a></h1>
 <p>Kubernetes secrets are used to store sensitive information, such as user certificates, passwords, or API keys. They are persisted in etcd as base64 encoded strings.  On EKS, the EBS volumes for etcd nodes are encypted with <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">EBS encryption</a>.  A pod can retrieve a Kubernetes secrets objects by referencing the secret in the <code>podSpec</code>.  These secrets can either be mapped to an environment variable or mounted as volume. For additional information on creating secrets, see https://kubernetes.io/docs/concepts/configuration/secret/. </p>
-<blockquote>
-<p>Caution: Secrets in a particular namespace can be referenced by all pods in the secret's namespace.</p>
-<p>Caution: The node authorizer allows the Kubelet to read all of the secrets mounted to the node. </p>
-</blockquote>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Secrets in a particular namespace can be referenced by all pods in the secret's namespace.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The node authorizer allows the Kubelet to read all of the secrets mounted to the node. </p>
+</div>
 <h2 id="recommendations_1">Recommendations<a class="headerlink" href="#recommendations_1" title="Permanent link">&para;</a></h2>
 <h3 id="use-aws-kms-for-envelop-encryption-of-kubernetes-secrets">Use AWS KMS for envelop encryption of Kubernetes secrets<a class="headerlink" href="#use-aws-kms-for-envelop-encryption-of-kubernetes-secrets" title="Permanent link">&para;</a></h3>
 <p>This allows you to encrypt your secrets with a unique data encryption key (DEK). The DEK is then encypted using a key encryption key (KEK) from AWS KMS which can be automatically rotated on a recurring schedule. With the KMS plugin for Kubernetes, all Kubernetes secrets are stored in etcd in ciphertext instead of plain text and can only be decrypted by the Kubernetes API server. 
