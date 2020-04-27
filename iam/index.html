@@ -807,9 +807,10 @@ AWS_WEB_IDENTITY_TOKEN_FILE=/var/run/secrets/eks.amazonaws.com/serviceaccount/to
 
 <h3 id="use-dedicated-service-accounts-for-each-application">Use dedicated service accounts for each application<a class="headerlink" href="#use-dedicated-service-accounts-for-each-application" title="Permanent link">&para;</a></h3>
 <p>Each application should have its own dedicated service account.  This applies to service accounts for the Kubernetes API as well as IRSA. </p>
-<blockquote>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
 <p>If you employ a blue/green approach to cluster upgrades instead of performing an in-place cluster upgrade, you will need to update the trust policy of each of the IRSA IAM roles with the OIDC endpoint of the new cluster. A blue/green cluster upgrade is where you create a cluster running a newer version of Kubernetes alongside the old cluster and use a load balancer or a service mesh to seamlessly shift traffic from services running on the old cluster to the new cluster. </p>
-</blockquote>
+</div>
 <h3 id="restrict-access-to-the-instance-profile-assigned-to-the-worker-node">Restrict access to the instance profile assigned to the worker node<a class="headerlink" href="#restrict-access-to-the-instance-profile-assigned-to-the-worker-node" title="Permanent link">&para;</a></h3>
 <p>When you use IRSA, the Pod no longer inherits the rights of the instance profile assigned to the worker node. Nonetheless, as an added precaution, you may want to block a process's ability to access <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html">instance metadata</a>. This will effectively prevent pods that do not use IRSA from inheriting the role assigned to the worker node. Be aware that when you block access to instance metadata on a worker node, it may prevent certain pods from functioning properly. For additional information about how to block access to instance metadata, see https://docs.aws.amazon.com/eks/latest/userguide/restrict-ec2-credential-access.html.</p>
 <h3 id="run-the-application-as-a-non-root-user">Run the application as a non-root user<a class="headerlink" href="#run-the-application-as-a-non-root-user" title="Permanent link">&para;</a></h3>
