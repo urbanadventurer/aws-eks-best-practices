@@ -854,6 +854,7 @@ spec:
 <li><a href="https://youtu.be/lEY2WnRHYpg">Kubernetes &amp; Tigera: Network Policies, Security, and Audit</a> </li>
 <li><a href="https://www.tigera.io/tigera-products/calico-enterprise/">Calico Enterprise</a></li>
 <li><a href="https://cilium.readthedocs.io/en/stable/intro/">Cilium</a></li>
+<li><a href="https://kinvolk.io/blog/2020/03/writing-kubernetes-network-policies-with-inspektor-gadgets-network-policy-advisor/">Kinvolk's Network Policy Advisor</a> Suggests network policies based on an analysis of network traffic</li>
 </ul>
 <h2 id="security-groups">Security groups<a class="headerlink" href="#security-groups" title="Permanent link">&para;</a></h2>
 <p>EKS uses <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">AWS VPC Security Groups</a> (SGs) to control the traffic between the Kubernetes control plane and the cluster's worker nodes. Security groups are also used to control the traffic between worker nodes, worker nodes and other VPC resources, and external IP addresses.  When you provision an EKS cluster (with Kubernetes version 1.14-eks.3 or greater), a cluster security group is automatically created for you.  The security group allows unfettered communication between the EKS control plane and the nodes from managed node groups. For simplicity, it is recommended that you add the cluster SG to all node groups, including unmanaged node groups.</p>
