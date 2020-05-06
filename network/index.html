@@ -681,6 +681,8 @@ spec:
   - Egress
 </code></pre>
 
+<p><img alt="" src="../images/default-deny.jpg" /></p>
+<p>!!! tip The image above was created by the network policy viewer from <a href="https://orca.tufin.io/netpol/">Tufin</a>.</p>
 <p><em>Calico global network policy</em></p>
 <pre><code class="yaml">apiVersion: crd.projectcalico.org/v1
 kind: GlobalNetworkPolicy
@@ -719,6 +721,7 @@ spec:
       port: 53
 </code></pre>
 
+<p><img alt="" src="../images/allow-dns-access.jpg" /></p>
 <p><em>Calico global policy equivalent</em></p>
 <pre><code class="yaml">apiVersion: crd.projectcalico.org/v1
 kind: GlobalNetworkPolicy
