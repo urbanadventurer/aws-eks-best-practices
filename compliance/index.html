@@ -319,6 +319,46 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#shifting-left" class="md-nav__link">
+    Shifting Left
+  </a>
+  
+    <nav class="md-nav" aria-label="Shifting Left">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#policy" class="md-nav__link">
+    Policy
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommendations" class="md-nav__link">
+    Recommendations
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-open-policy-agent-opa-or-alcides-skan-to-detect-policy-violations-before-deployment" class="md-nav__link">
+    Use Open Policy Agent (OPA) or Alcide's sKan to detect policy violations before deployment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tools-and-resources" class="md-nav__link">
     Tools and resources
   </a>
@@ -368,6 +408,46 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#shifting-left" class="md-nav__link">
+    Shifting Left
+  </a>
+  
+    <nav class="md-nav" aria-label="Shifting Left">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#policy" class="md-nav__link">
+    Policy
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommendations" class="md-nav__link">
+    Recommendations
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-open-policy-agent-opa-or-alcides-skan-to-detect-policy-violations-before-deployment" class="md-nav__link">
+    Use Open Policy Agent (OPA) or Alcide's sKan to detect policy violations before deployment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#tools-and-resources" class="md-nav__link">
@@ -553,7 +633,18 @@
 </tbody>
 </table>
 <p>Compliance status changes over time. For the latest status, always refer to https://aws.amazon.com/compliance/services-in-scope/. </p>
-<h3 id="tools-and-resources">Tools and resources<a class="headerlink" href="#tools-and-resources" title="Permanent link">&para;</a></h3>
+<h2 id="shifting-left">Shifting Left<a class="headerlink" href="#shifting-left" title="Permanent link">&para;</a></h2>
+<p>The concept of shifting left involves catching policy violations and errors earlier in the software development lifecycle. From a security perspective, this can be very beneficial. A developer, for example, can fix issues with their configuration before their application is deployed to the cluster. Catching mistakes like this earlier will help prevent configurations that violate your policies from being deployed.</p>
+<h3 id="policy">Policy<a class="headerlink" href="#policy" title="Permanent link">&para;</a></h3>
+<p>Policy can be thought of a set of rules for governing behaviors, i.e. behavior that are allowed or those that are prohibited. For example, you may have a policy that says that all Dockerfiles should include a USER directive that causes the container to run as a non-root user. As a document, a policy like this can be hard to discover and enforce. It may also become outdated as your requirements change.</p>
+<h2 id="recommendations">Recommendations<a class="headerlink" href="#recommendations" title="Permanent link">&para;</a></h2>
+<h3 id="use-open-policy-agent-opa-or-alcides-skan-to-detect-policy-violations-before-deployment">Use Open Policy Agent (OPA) or Alcide's sKan to detect policy violations before deployment<a class="headerlink" href="#use-open-policy-agent-opa-or-alcides-skan-to-detect-policy-violations-before-deployment" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.openpolicyagent.org/">OPA</a> is open source policy engine that's part of CNCF. It's used for making policy decisions and can be run a variety of different ways, e.g. as a language library or a service. OPA policies are written in Domain Specific Languagee (DSL) called Rego. While it is often run as part of a Kubernetes Dynamic Admission Controller, OPA can also be incorporated into your CI/CD pipeline. This allows developers to get feedback about their configuration earlier in the release cycle which can subsequently help them resolve issues before they get to production.  </p>
+<ul>
+<li><a href="https://github.com/open-policy-agent/conftest">Conftest</a> is built on top of OPA and it provides a developer focused experience for testing Kubernetes configuration. </li>
+<li><a href="https://github.com/alcideio/skan">sKan</a> is powered by OPA and is "tailor made" to check whether their Kubernetes configuration files are compliant with security and operational best practices. </li>
+</ul>
+<h2 id="tools-and-resources">Tools and resources<a class="headerlink" href="#tools-and-resources" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://github.com/aquasecurity/kube-bench">kube-bench</a></li>
 <li><a href="https://github.com/docker/docker-bench-security">docker-bench-security</a></li>
